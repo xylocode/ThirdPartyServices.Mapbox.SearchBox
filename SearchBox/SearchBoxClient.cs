@@ -173,12 +173,15 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
         public RetrieveResult Retrieve(string id)
         {
             var q = new UrlParams();
-            
-            if (SessionExpired)
-                RefreshSessionToken();
-            
-            q["session_token"] = sessionToken;
-            retrieveCnt++;
+
+            lock (sessionToken)
+            {
+                if (SessionExpired)
+                    RefreshSessionToken();
+
+                q["session_token"] = sessionToken;
+                retrieveCnt++;
+            }
             
             return Request<RetrieveResult>("https://api.mapbox.com/search/searchbox/v1/retrieve/" + id, q); ;
         }
