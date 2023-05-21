@@ -36,10 +36,13 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
         private long timeStamp = 0;
         private int suggestCnt = 0;
         private int retrieveCnt = 0;
+        
         private bool SessionExpired =>  DateTime.Now.Ticks - timeStamp > 36000000000L;
+        
         private void RefreshSessionToken()
         {
             sessionToken = Guid.NewGuid().ToString();
+            timeStamp = DateTime.Now.Ticks;
             suggestCnt = 0;
             retrieveCnt = 0;
         }
