@@ -32,31 +32,17 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
         }
 
 
-        public long SessionTokenLivetime { get; set; } = 1780000000L;
-
-
-        private string sessionToken = null!;
-        private long sessionTokenTimeStamp = 0;
-
-        /// <summary>
-        /// A customer-provided session token value, which groups a series of requests together for billing purposes.
-        /// UUIDv4 is recommended.
-        /// For more information on how session_token is used to group Search API calls into one session, see the Session-based pricing section of this documentation.
-        /// </summary>
-        private string SessionToken
+        private string sessionToken;
+        private long timeStamp = 0;
+        private int suggestCnt = 0;
+        private int retrieveCnt = 0;
+        private bool SessionExpired =>  DateTime.Now.Ticks - timeStamp > 36000000000L;
+        private void RefreshSessionToken()
         {
-            get
-            {
-                var now = DateTime.Now.Ticks;
-                if (now - sessionTokenTimeStamp > SessionTokenLivetime)
-                {
-                    sessionToken = Guid.NewGuid().ToString();
-                    sessionTokenTimeStamp = now;
-                }
-                return sessionToken;
-            }
+            sessionToken = Guid.NewGuid().ToString();
+            suggestCnt = 0;
+            retrieveCnt = 0;
         }
-
 
         private TResponse Request<TResponse>(string baseUri, UrlParams urlParams)
             where TResponse : class, new()
@@ -66,7 +52,6 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
             string content;
 
             urlParams["access_token"] = AccessToken;
-            urlParams["session_token"] = SessionToken;
             string requestUri = baseUri + "?" + urlParams.ToString();
 
             while (--attempts > 0)
@@ -142,7 +127,7 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
             string richMetadataProvider = null!,
             string poiCategoryExclusions = null!)
         {
-
+            
             var q = new UrlParams
             {
                 ["q"] = query,
@@ -165,6 +150,16 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
                 ["rich_metadata_provider"] = richMetadataProvider,
                 ["poi_category_exclusions"] = poiCategoryExclusions
             };
+            
+            lock (sessionToken)
+            {
+                if (suggestCnt > 50 | retrieveCnt > 0 || SessionExpired)
+                    RefreshSessionToken();
+        
+                q["session_token"] = sessionToken;
+                suggestCnt++;
+            }
+
             return Request<SuggestionResult>("https://api.mapbox.com/search/searchbox/v1/suggest", q);
         }
 
@@ -178,6 +173,13 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
         public RetrieveResult Retrieve(string id)
         {
             var q = new UrlParams();
+            
+            if (SessionExpired)
+                RefreshSessionToken();
+            
+            q["session_token"] = sessionToken;
+            retrieveCnt++;
+            
             return Request<RetrieveResult>("https://api.mapbox.com/search/searchbox/v1/retrieve/" + id, q); ;
         }
     }
