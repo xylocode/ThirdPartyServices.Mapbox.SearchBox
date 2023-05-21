@@ -153,7 +153,7 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
             
             lock (l)
             {
-                if (suggestCnt > 50 | retrieveCnt > 0 || SessionExpired)
+                if (suggestCnt > 50 || retrieveCnt > 0 || SessionExpired)
                     RefreshSessionToken();
         
                 q["session_token"] = sessionToken;
