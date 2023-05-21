@@ -6,7 +6,7 @@ namespace SearchBoxConsoleApp
     {
         static void Main(string[] args)
         {
-            string accessToken = "";
+            string accessToken = "Default public token from https://account.mapbox.com/";
             string searchText = "671 Lincoln Ave";
             
             var searchBox = new SearchBoxClient(accessToken);
@@ -14,8 +14,8 @@ namespace SearchBoxConsoleApp
             foreach (var suggestion in searchResult.Suggestions)
             {
                 Console.WriteLine(suggestion.FullAddress);
-                var retrive = searchBox.Retrieve(suggestion.MapboxId);
-                foreach (var feature in retrive.Features)
+                var retrieve = searchBox.Retrieve(suggestion.MapboxId);
+                foreach (var feature in retrieve.Features)
                 {
                     Console.WriteLine("{0} {1}", feature.Properties.Coordinates.Latitude, feature.Properties.Coordinates.Longitude);
                 }

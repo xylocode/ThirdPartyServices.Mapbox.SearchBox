@@ -9,7 +9,8 @@ Support only `/suggest` and `/retrieve` endpoints are used together to build an 
 Mapbox is an American provider of custom online maps for websites and applications such as Foursquare, Lonely Planet, the Financial Times, The Weather Channel, Instacart Inc. and Snapchat. Since 2010, it has rapidly expanded the niche of custom maps, as a response to the limited choice offered by map providers such as Google Maps.
 
 Official website:
-[https://www.mapbox.com/](https://www.mapbox.com/)
+
+- [https://www.mapbox.com/](https://www.mapbox.com/)
 
 ## Search Box
 
