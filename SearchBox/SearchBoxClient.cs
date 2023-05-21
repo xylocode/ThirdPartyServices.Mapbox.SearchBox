@@ -31,7 +31,7 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
             jso.Converters.Add(new JsonStringEnumConverter());
         }
 
-
+        private string l = "l";
         private string sessionToken;
         private long timeStamp = 0;
         private int suggestCnt = 0;
@@ -151,7 +151,7 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
                 ["poi_category_exclusions"] = poiCategoryExclusions
             };
             
-            lock (sessionToken)
+            lock (l)
             {
                 if (suggestCnt > 50 | retrieveCnt > 0 || SessionExpired)
                     RefreshSessionToken();
@@ -174,7 +174,7 @@ namespace XyloCode.ThirdPartyServices.Mapbox.SearchBox
         {
             var q = new UrlParams();
 
-            lock (sessionToken)
+            lock (l)
             {
                 if (SessionExpired)
                     RefreshSessionToken();
