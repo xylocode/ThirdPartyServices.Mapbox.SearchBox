@@ -21,6 +21,21 @@ Official website:
 - [Product Information](https://www.mapbox.com/search-box)
 - [Documentation](https://docs.mapbox.com/api/search/search-box/)
 
+## Session token generation
+
+Pricing for the Mapbox Search Box API is based on which API endpoints are used.
+If you are using the `/suggest` or `/retrieve` endpoints, usage will be billed per search session.
+
+The `session_token` is generated automatically based on the rules of the service.
+
+A Search Session is a series of Search API calls bundled together for billing purposes. The `session_token` parameter is used to group a series of requests together into one session for billing purposes.
+
+A session ends after the following actions:
+
+- A call is made to `/suggest` followed by a call to `/retrieve` with a common `session_token`.
+- 50 successive calls are made to `/suggest` with a common `session_token` but are not followed by a call to `/retrieve`.
+- A call is made to `/suggest` and 60 minutes pass without being followed by a call to `/retrieve`.
+
 ## How to use
 
 ```cs
