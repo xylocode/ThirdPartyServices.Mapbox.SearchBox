@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 	<IncludeContentInPack>true</IncludeContentInPack>
-	<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+	<TargetFrameworks>net7.0;net6.0;net8.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <PackageId>XyloCode.ThirdPartyServices.Mapbox.SearchBox</PackageId>
@@ -10,10 +10,9 @@
     <RootNamespace>XyloCode.ThirdPartyServices.Mapbox.SearchBox</RootNamespace>
     <Authors>xylocode</Authors>
     <Description>An unofficial client library for accessing the Mapbox Search Box API. Search millions of continuously updated locations, including addresses, places, and points of interest, with a single search box. The Search Box API serves 340 Million+ addresses and 170 Million+ POIs with ever-improving coverage and quality on a global scale.</Description>
-    <Copyright>Copyright (c) Sergey Korobeynikov 2023</Copyright>
+    <Copyright>Copyright (c) 2023 Sergey Korobeynikov</Copyright>
     <PackageTags>SearchBox; Mapbox; geolocation; address; autofill; suggest</PackageTags>
     <Title>SearchBox</Title>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
     <PackageReleaseNotes>Changing the mechanism for generating a session token.</PackageReleaseNotes>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <PackageIcon>MapboxLogo.jpg</PackageIcon>
@@ -23,14 +22,9 @@
     <RepositoryUrl>https://github.com/xylocode/ThirdPartyServices.Mapbox.SearchBox</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://xylocode.com/third-party-services/mapbox</PackageProjectUrl>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
-    <Version>1.1.2</Version>
+    <Version>1.2.0</Version>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-  </ItemGroup>
 
   <ItemGroup>
   <None Include="LICENSE.txt" Pack="true" PackagePath="" />
