@@ -13,8 +13,7 @@
     <Copyright>Copyright (c) 2023 Sergey Korobeynikov</Copyright>
     <PackageTags>SearchBox; Mapbox; geolocation; address; autofill; suggest</PackageTags>
     <Title>SearchBox</Title>
-    <PackageReleaseNotes>Changing the mechanism for generating a session token.</PackageReleaseNotes>
-    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <PackageReleaseNotes>NET 8.0 support.</PackageReleaseNotes>
     <PackageIcon>MapboxLogo.jpg</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -22,8 +21,10 @@
     <RepositoryUrl>https://github.com/xylocode/ThirdPartyServices.Mapbox.SearchBox</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://xylocode.com/third-party-services/mapbox</PackageProjectUrl>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
 	<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<IncludeSymbols>True</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
   <ItemGroup>
